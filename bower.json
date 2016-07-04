@@ -9,10 +9,11 @@
   "homepage": "",
   "private": true,
   "dependencies": {
-    "jquery": "^3.0.0",
+    "jquery": "^1.11.3",
     "toastr": "^2.1.2",
     "angular": "^1.5.7",
     "angular-resource": "^1.5.7",
-    "angular-route": "^1.5.7"
+    "angular-route": "^1.5.7",
+    "bootstrap": "^3.3.6"
   }
 }
