@@ -20,6 +20,9 @@ app.set('view engine', 'ejs');
 
 app.set('views', __dirname + '/server/views');
 
+app.get('/partials/:partialPath', function(req, res){
+	res.render('partials/' + req.params.partialPath);
+});
 
 app.get('*', function(req, res){
 	res.render('index');
