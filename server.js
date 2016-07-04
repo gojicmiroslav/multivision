@@ -4,10 +4,22 @@ var bodyParser = require('body-parser');
 var morgan = require('morgan');
 var ejs = require('ejs');
 var engine = require('ejs-mate');
+var mongoose = require('mongoose');
 
 //determine are we in production environment or not
 //proccess.env.NODE_ENV - node environment variable, it doesn't have default value
 var env = process.env.NODE_ENV = process.env.NODE_ENV || 'development';
+
+mongoose.connect('mongodb://localhost/multivison', function(err){
+	if(err) {
+		console.log(err);
+	} else {
+		console.log("Connected to MongoDb");
+	}
+});
+
+var db = mongoose.connection;
+
 
 app.use(express.static('public'));
 app.use(morgan('dev'));
