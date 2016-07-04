@@ -10,15 +10,18 @@ var mongoose = require('mongoose');
 //proccess.env.NODE_ENV - node environment variable, it doesn't have default value
 var env = process.env.NODE_ENV = process.env.NODE_ENV || 'development';
 
-mongoose.connect('mongodb://localhost/multivison', function(err){
-	if(err) {
-		console.log(err);
-	} else {
-		console.log("Connected to MongoDb");
-	}
-});
-
+mongoose.connect('mongodb://localhost/multivision');
 var db = mongoose.connection;
+db.on('error', console.error.bind(console, 'connection error...'));
+db.once('open', function callback() {
+  console.log('multivision db opened');
+});
+var messageSchema = mongoose.Schema({message: String});
+var Message = mongoose.model('Message', messageSchema);
+var mongoMessage;
+Message.findOne().exec(function(err, messageDoc) {
+  mongoMessage = messageDoc.message;
+});
 
 
 app.use(express.static('public'));
@@ -37,7 +40,9 @@ app.get('/partials/:partialPath', function(req, res){
 });
 
 app.get('*', function(req, res){
-	res.render('index');
+	res.render('index', {
+		mongoMessage: mongoMessage
+	});
 });
 
 app.listen(3030, function(){
