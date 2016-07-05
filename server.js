@@ -9,8 +9,14 @@ var mongoose = require('mongoose');
 //determine are we in production environment or not
 //proccess.env.NODE_ENV - node environment variable, it doesn't have default value
 var env = process.env.NODE_ENV = process.env.NODE_ENV || 'development';
+console.log('ENV: ' + env);
 
-mongoose.connect('mongodb://localhost/multivision');
+if(env === 'development') {
+	mongoose.connect('mongodb://localhost/multivision');
+} else {
+	mongoose.connect('mongodb://miroslavy2k:deronje777@ds015335.mlab.com:15335/multivision');
+}
+
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error...'));
 db.once('open', function callback() {
@@ -45,6 +51,8 @@ app.get('*', function(req, res){
 	});
 });
 
-app.listen(3030, function(){
+var port = process.env.PORT || 3030;
+
+app.listen(port, function(){
 	console.log('App is listening on port 3030');
 });
