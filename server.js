@@ -1,49 +1,17 @@
 var express = require('express');
 var app = express();
-var bodyParser = require('body-parser');
-var morgan = require('morgan');
-var ejs = require('ejs');
-var engine = require('ejs-mate');
-var mongoose = require('mongoose');
 
 //determine are we in production environment or not
 //proccess.env.NODE_ENV - node environment variable, it doesn't have default value
 var env = process.env.NODE_ENV = process.env.NODE_ENV || 'development';
 console.log('ENV: ' + env);
 
-if(env === 'development') {
-	mongoose.connect('mongodb://localhost/multivision');
-} else {
-	mongoose.connect('mongodb://miroslavy2k:deronje777@ds015335.mlab.com:15335/multivision');
-}
+var config = require('./server/config/config')[env];
+require('./server/config/express')(app, config);
+require('./server/config/mongoose')(config);
+require('./server/config/routes')(app);
 
-var db = mongoose.connection;
-db.on('error', console.error.bind(console, 'connection error...'));
-db.once('open', function callback() {
-  console.log('multivision db opened');
-});
 
-// Engine
-app.engine('ejs', engine);
-app.set('view engine', 'ejs'); 
-app.set('views', __dirname + '/server/views');
-
-app.use(express.static('public'));
-app.use(morgan('dev'));
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
-
-app.get('/partials/*', function(req, res){
-	// set up path relative to the views directory
-	res.render('../../public/app/' + req.params[0]);
-});
-
-app.get('*', function(req, res){
-	res.render('index');
-});
-
-var port = process.env.PORT || 3030;
-
-app.listen(port, function(){
-	console.log('App is listening on port 3030');
+app.listen(config.port, function(){
+	console.log('App is listening on port ' + config.port);
 });
