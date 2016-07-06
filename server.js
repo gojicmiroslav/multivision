@@ -23,16 +23,15 @@ db.once('open', function callback() {
   console.log('multivision db opened');
 });
 
+// Engine
+app.engine('ejs', engine);
+app.set('view engine', 'ejs'); 
+app.set('views', __dirname + '/server/views');
+
 app.use(express.static('public'));
 app.use(morgan('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-
-// Engine
-app.engine('ejs', engine);
-app.set('view engine', 'ejs'); 
-
-app.set('views', __dirname + '/server/views');
 
 app.get('/partials/:partialPath', function(req, res){
 	res.render('partials/' + req.params.partialPath);
