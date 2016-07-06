@@ -1,0 +1,11 @@
+<div class="navbar-right" ng-controller="mvNavbarLoginCtrl">
+	<form class="navbar-form">
+	    <div class="form-group">
+	      <input type="text" placeholder="Email" class="form-control" ng-model="username">
+	    </div>
+	    <div class="form-group">
+	      <input type="password" placeholder="Password" class="form-control" ng-model="password">
+	    </div>
+	    <button type="submit" class="btn btn-success" ng-click="signIn(username, password)">Sign in</button>
+  </form>
+</div>
