@@ -34,15 +34,15 @@ module.exports = function(config){
 
 				salt = createSalt();
 				hash = hashPassword(salt, 'joe');
-				User.create({ userName: "Joe", lastName: "Eames", username: "joe", salt: salt, hashed_password: hash });
+				User.create({ firstName: "Joe", lastName: "Eames", username: "joe", salt: salt, hashed_password: hash });
 
 				salt = createSalt();
 				hash = hashPassword(salt, 'john');
-				User.create({ userName: "John", lastName: "Papa", username: "john", salt: salt, hashed_password: hash });
+				User.create({ firstName: "John", lastName: "Papa", username: "john", salt: salt, hashed_password: hash });
 
 				salt = createSalt();
 				hash = hashPassword(salt, 'dan');
-				User.create({ userName: "Dan", lastName: "Wahlin", username: "dan", salt: salt, hashed_password: hash });
+				User.create({ firstName: "Dan", lastName: "Wahlin", username: "dan", salt: salt, hashed_password: hash });
 			}
 		});
 }

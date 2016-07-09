@@ -13,6 +13,17 @@ angular.module('app').factory('mvAuth', function($http, mvIdentity, $q){
 			});
 
 			return deferred.promise;
+		},
+
+		logout: function(){
+			var deferred = $q.defer();			
+
+			$http.post('/logout', { logout: true }).then(function(){
+				mvIdentity.currentUser = undefined;
+				deferred.resolve();
+			});
+
+			return deferred.promise;
 		}	
 	}
 });
