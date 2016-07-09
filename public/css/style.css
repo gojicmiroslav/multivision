@@ -10,3 +10,11 @@ footer {
   border-top: 1px solid #e5e5e5;
   margin-top: 40px;
 }
+
+.toast-top-right{
+	top: 50px;
+}
+
+.toast-success {
+
+}
