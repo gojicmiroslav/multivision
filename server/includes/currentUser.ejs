@@ -1,0 +1,8 @@
+<script src="/vendor/ejs.js"></script>
+<% if(bootstrappedUser) { %>
+	<script>
+		window.bootstrappedUserObject = JSON.parse(ejs.render("<%= JSON.stringify(bootstrappedUser) %>").replace(/&quot;/g,'"'));  
+
+		console.log(window.bootstrappedUserObject);
+	</script>
+<% } %>	
