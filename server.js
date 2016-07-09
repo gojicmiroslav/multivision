@@ -15,9 +15,9 @@ require('./server/config/mongoose')(config);
 var User = mongoose.model('User');
 
 passport.use(new LocalStrategy(
-	function(username, passport, done){
+	function(username, password, done){
 		User.findOne({ username: username }).exec(function(err, user){
-			if(user) { // if user found
+			if(user && user.authenticate(password)) { // if user found
 				return done(null, user);
 			} else {
 				return done(null, false);
