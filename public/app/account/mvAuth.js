@@ -28,6 +28,6 @@ angular.module('app').factory('mvAuth', function($http, mvIdentity, $q, mvUser){
 			});
 
 			return deferred.promise;
-		}	
+		}
 	}
 });

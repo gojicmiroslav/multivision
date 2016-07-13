@@ -6,5 +6,4 @@ angular.module('app').factory('mvUser', function($resource){
 	};
 
 	return UserResource;
-
 });
