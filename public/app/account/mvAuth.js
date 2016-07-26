@@ -36,6 +36,20 @@ angular.module('app').factory('mvAuth', function($http, mvIdentity, $q, mvUser){
 			} else {
 				return $q.reject('not authorized');
 			}
+		},
+
+		createUser: function(newUser){
+			var deferred = $q.defer();	
+			var user = new mvUser(newUser);
+
+			user.$save().then(function(){
+				mvIdentity.currentUser = user;
+				deferred.resolve();
+			}, function(response){ // reject promise if fails
+				deferred.reject(response.data.reason);
+			});	
+
+			return deferred.promise;			
 		}
 	}
 });

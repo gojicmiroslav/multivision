@@ -1,0 +1,45 @@
+<div class="container">
+	<div class="row">
+		<div class="well">
+			<fieldset>
+				<legend>Sign Up</legend>
+				<form class="form-horizontal" name="signup_form">
+					<div class="form-group">
+						<label for="email" class="col-sm-2 control-label">Email</label>
+						<div class="col-sm-10">
+					  		<input type="email" class="form-control" name="email" id="email" placeholder="Email" ng-model="email" required>
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label for="password" class="col-sm-2 control-label">Password</label>
+						<div class="col-sm-10">
+					  		<input type="password" class="form-control" name="password" id="password" placeholder="Password" ng-model="password" required>
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label for="firstname" class="col-sm-2 control-label">First Name</label>
+						<div class="col-sm-10">
+					  		<input type="text" class="form-control" name="firstname" id="firstname" placeholder="First Name" ng-model="firstname" required>
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label for="lastname" class="col-sm-2 control-label">Last Name</label>
+						<div class="col-sm-10">
+					  		<input type="text" class="form-control" name="lastname" id="lastname" placeholder="Last Name" ng-model="lastname" required>
+						</div>
+					</div>
+
+					<div class="form-group">
+						<div class="col-sm-offset-2 col-sm-10">
+					  		<button type="submit" class="btn btn-primary" ng-click="signup()" ng-disabled="">Sign Up</button> &nbsp;
+					  		<a href="/" class="btn btn-default">Cancel</a>
+						</div>
+					</div>
+				</form>
+			</fieldset>
+		</div>
+	</div>
+</div>
