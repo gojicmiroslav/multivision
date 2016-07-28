@@ -29,3 +29,32 @@ exports.createUser = function(req, res, next){
 		});
 	});
 };
+
+exports.updateUser = function(req, res, next){
+	var userData = req.body;
+
+	// check if current user(logged in user) matches user being updated or it is not admin
+	if(req.user._id != userData._id && !req.user.hasRole("admin")){
+		res.status("403");
+		return res.end();
+	}
+
+	// now we can update. We have two object to update: user in DB and current user
+	req.user.firstName = userData.firstName;
+	req.user.lastName = userData.lastName;
+	req.user.username = userData.username;
+	if(userData.password && userData.password.length > 0) {
+		req.user.salt = encrypt.createSalt();
+		req.user.hashed_password = encrypt.hashPassword(req.user.salt, userData.password);
+	}
+
+	// now when current user is updated we save in DB
+	req.user.save(function(err){
+		if(err){
+			res.status(400);
+			return res.send({ reason: err.toString() });
+		}
+
+		res.send(req.user);
+	});
+};

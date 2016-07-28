@@ -50,6 +50,30 @@ angular.module('app').factory('mvAuth', function($http, mvIdentity, $q, mvUser){
 			});	
 
 			return deferred.promise;			
+		},
+
+		authorizeAuthenticatedUserForRoute: function(){
+			if(mvIdentity.isAuthenticated()){
+				return true;
+			} else {
+				return $q.reject('not authorized');
+			}
+		},
+
+		updateCurrentUser: function(newUserData){
+			var deferred = $q.defer();	
+
+			var userClone = angular.copy(mvIdentity.currentUser);
+			// copy new data to clone user object
+			angular.extend(userClone, newUserData);
+			userClone.$update().then(function(){
+				mvIdentity.currentUser = userClone;
+				deferred.resolve();
+			}, function(response){
+				deferred.reject(response.data.err);
+			});
+
+			return deferred.promise;
 		}
 	}
 });

@@ -17,6 +17,10 @@ var userSchema = mongoose.Schema({
 userSchema.methods = {
 	authenticate: function(password) {
 		return encrypt.hashPassword(this.salt, password) === this.hashed_password
+	},
+
+	hasRole: function(role){
+		return this.roles.indexOf(role) > -1;
 	}
 };
 
