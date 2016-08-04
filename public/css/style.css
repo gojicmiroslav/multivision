@@ -11,6 +11,14 @@ footer {
   margin-top: 40px;
 }
 
+.top-padding-medium {
+	padding-top: 10px;
+}
+
+.margin-left-medium {
+	margin-left: 10px;
+}
+
 .toast-top-right{
 	top: 50px;
 }
