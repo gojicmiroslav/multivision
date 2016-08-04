@@ -24,6 +24,7 @@ userSchema.methods = {
 	}
 };
 
+// make model based on the schema
 var User = mongoose.model('User', userSchema);
 
 function createDefaultUsers(){
