@@ -5,3 +5,12 @@ exports.getCourses = function(req, res){
 		res.send(collection);
 	});
 }
+
+exports.getCourse = function(req, res, next){
+	Course.findOne({ _id: req.params.id }, function(err, course){
+		console.log(course);
+		if(err) return next(err);
+		res.send(course);
+	});
+}
+

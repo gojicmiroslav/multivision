@@ -36,4 +36,3 @@ function createDefaultCourses(){
 }
 
 exports.createDefaultCourses = createDefaultCourses;
-
